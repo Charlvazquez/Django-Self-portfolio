@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1>Bienvenido a las publicaciones del blog</h1>
+{% for entrada in entradas %}
+
+<div class="p-3">
+    <div class="card card body bg-black">
+        <div class="row">
+            <div class="col-3">
+                <img src="{{entrada.imagen.url}}" alt="{{entrada.titulo}}" class="img-fluid"> 
+            </div>
+            <div class="col-9">
+                <h2>{{entrada.titulo}}</h2>
+                <p>{{entrada.descripcion|striptags|truncatechars:200}}</p> <!--truncatechars es para especificar el numero de caracteres a mostrar en un texto aparte del que ya tienes-->
+                <p>{{entrada.fecha|date:'M d Y'}}</p>
+                <!--striptags es para al momento de escribir y ponerle en una etiqueta en especifico se leera dicho texto normal como si fuera <p />-->
+    
+                <!--para crear una vinculacion para cada post se creara una variable en la parte de las url y aparte detallar el nombre de la ruta para las entradas-->
+                <!--seguido de eso agregar el campo id para definir cada post-->
+                <a href="{% url 'blog:detalles' entrada.id %}" class="btn btn-primary">{{entrada.titulo}}</a>
+            </div>
+        </div>
+         
+    
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
